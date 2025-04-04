@@ -4,7 +4,7 @@ services:
 
   php:
     container_name: QueryConverterSQLtoMongoDB_php5.4.16
-    image: ivsndhdang/php5.4.16
+    image: ivsndhdang/php5.4.16 
     ports:
       - "80:80"
     volumes:
