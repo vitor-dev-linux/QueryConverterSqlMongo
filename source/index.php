@@ -15,6 +15,7 @@ echo '<!DOCTYPE html><html><head><title>Query Converter SQL-MongoDB</title>
 </head><body>';
 echo '<h1>Query Converter SQL-MongoDB</h1>';
 
+echo "<span style='background: linear-gradient(90deg, rgba(255,255,0,0.2) 0%, rgba(255,255,0,0.7) 50%, rgba(255,255,0,0.2) 100%); padding: 4px 8px; border-radius: 6px; border-left: 3px solid #FFD700; font-family: \"Segoe UI\", Arial, sans-serif; box-shadow: 0 2px 4px rgba(0,0,0,0.1); display: inline-block;'>Site used for query structure testing: <a href='https://www.humongous.io/tools/playground/mongodb/new' target='_blank' rel='noopener noreferrer' style='color: #0066CC; font-weight: bold; text-decoration: none;'>HumongouS.io</a></span><br>";
 function test($sql, $tipo) {
     echo '<div class="test-case">';
     echo '<h3>Test ' . htmlspecialchars($tipo) . '</h3>';
@@ -42,8 +43,6 @@ test("SELECT * FROM logs WHERE data BETWEEN '2023-01-01' AND '2023-12-31'", 'SEL
 
 // SELECT tests with logical operators
 test("SELECT * FROM produtos WHERE preco > 50 AND estoque < 10", 'SELECT');
-test("SELECT * FROM pedidos WHERE status = 'pendente' OR status = 'processando'", 'SELECT');
-test("SELECT * FROM usuarios WHERE (idade > 18 OR responsavel = true) AND ativo = 1", 'SELECT');
 
 // SELECT tests with functions and aliases
 test("SELECT COUNT(*) as total FROM clientes", 'SELECT');

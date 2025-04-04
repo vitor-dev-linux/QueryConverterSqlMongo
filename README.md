@@ -12,10 +12,9 @@ This repository contains an advanced PHP class that translates SQL statements (S
 
 **Key Features:**
 - Supports complex WHERE conditions with logical operators (AND, OR, NOT)
-- Handles JOIN operations (converted to $lookup aggregation)
-- Converts SQL functions (COUNT, SUM, AVG) to MongoDB aggregation operators
+- Converts SQL functions (COUNT, AVG) to MongoDB aggregation operators
 - Processes GROUP BY with HAVING clauses
-- Maintains ORDER BY, LIMIT and OFFSET functionality
+- Maintains ORDER BY, LIMIT functionality
 - Type conversion for values (strings, numbers, booleans, null)
 - Comprehensive error handling
 
@@ -27,26 +26,21 @@ This repository contains an advanced PHP class that translates SQL statements (S
 
 **Example Conversion:**
 ```sql
-SELECT department, AVG(salary) as avg_salary 
-FROM employees 
-WHERE hire_date > '2020-01-01' 
-GROUP BY department 
-HAVING COUNT(*) > 5 
-ORDER BY avg_salary DESC
+SELECT produto, preco FROM itens WHERE preco > 100 ORDER BY preco DESC
 ```
 
 Converts to:
 ```javascript
-db.employees.aggregate([
-  { $match: { hire_date: { $gt: "2020-01-01" } } },
-  { $group: {
-      _id: "$department",
-      avg_salary: { $avg: "$salary" },
-      count: { $sum: 1 }
-  }},
-  { $match: { count: { $gt: 5 } } },
-  { $sort: { avg_salary: -1 } }
-])
+db.itens.find({
+    "preco": {
+        "$gt": "100"
+    }
+}).projection({
+    "produto": 1,
+    "preco": 1
+}).sort({
+    "preco": -1
+})
 ```
 
 **Getting Started:**
